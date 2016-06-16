@@ -40,13 +40,13 @@ public class ReportGeneratorTest {
 
     private Connection getConnection() {
 
-        String dbUrl = "jdbc:oracle:thin:@localhost:1521:mydbname";
+        String dbUrl = "jdbc:h2:./target/h2db/db/safh;DB_CLOSE_DELAY=-1";
 
-        String dbDriver = "oracle.jdbc.driver.OracleDriver";
+        String dbDriver = "org.h2.Driver";
 
-        String dbUname = "mydb";
+        String dbUname = "sa";
 
-        String dbPwd = "mydbpw";
+        String dbPwd = "";
 
         // Load the JDBC driver
         try {

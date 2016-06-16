@@ -1,15 +1,12 @@
 package br.com.rogrs.reports.domain;
 
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 
 @Entity
-@Table(name = "datasources")
 public class Datasources extends AbstractPersistable<Long>{
     
     private static final long serialVersionUID = 1L;
