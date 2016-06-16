@@ -22,56 +22,43 @@ import br.com.rogrs.reports.Application;
 @Controller
 public class FileUploadController {
 
-        @RequestMapping(method = RequestMethod.GET, value = "/")
-        public String provideUploadInfo(Model model) {
-                File rootFolder = new File(Application.ROOT);
-                List<String> fileNames = Arrays.stream(rootFolder.listFiles())
-                        .map(f -> f.getName())
-                        .collect(Collectors.toList());
+    @RequestMapping(method = RequestMethod.GET, value = "/")
+    public String provideUploadInfo(Model model) {
+        File rootFolder = new File(Application.ROOT);
+        List<String> fileNames = Arrays.stream(rootFolder.listFiles()).map(f -> f.getName()).collect(Collectors.toList());
 
-                model.addAttribute("files",
-                        Arrays.stream(rootFolder.listFiles())
-                                        .sorted(Comparator.comparingLong(f -> -1 * f.lastModified()))
-                                        .map(f -> f.getName())
-                                        .collect(Collectors.toList())
-                );
+        model.addAttribute("files", Arrays.stream(rootFolder.listFiles()).sorted(Comparator.comparingLong(f -> -1 * f.lastModified()))
+                .map(f -> f.getName()).collect(Collectors.toList()));
 
-                return "uploadForm";
+        return "uploadForm";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/")
+    public String handleFileUpload(@RequestParam("name") String name, @RequestParam("file") MultipartFile file,
+            RedirectAttributes redirectAttributes) {
+        if (name.contains("/")) {
+            redirectAttributes.addFlashAttribute("message", "Folder separators not allowed");
+            return "redirect:/";
+        }
+        if (name.contains("/")) {
+            redirectAttributes.addFlashAttribute("message", "Relative pathnames not allowed");
+            return "redirect:/";
         }
 
-        @RequestMapping(method = RequestMethod.POST, value = "/")
-        public String handleFileUpload(@RequestParam("name") String name,
-                                                                   @RequestParam("file") MultipartFile file,
-                                                                   RedirectAttributes redirectAttributes) {
-                if (name.contains("/")) {
-                        redirectAttributes.addFlashAttribute("message", "Folder separators not allowed");
-                        return "redirect:/";
-                }
-                if (name.contains("/")) {
-                        redirectAttributes.addFlashAttribute("message", "Relative pathnames not allowed");
-                        return "redirect:/";
-                }
-
-                if (!file.isEmpty()) {
-                        try {
-                                BufferedOutputStream stream = new BufferedOutputStream(
-                                                new FileOutputStream(new File(Application.ROOT + "/" + name)));
+        if (!file.isEmpty()) {
+            try {
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(Application.ROOT + "/" + name)));
                 FileCopyUtils.copy(file.getInputStream(), stream);
-                                stream.close();
-                                redirectAttributes.addFlashAttribute("message",
-                                                "You successfully uploaded " + name + "!");
-                        }
-                        catch (Exception e) {
-                                redirectAttributes.addFlashAttribute("message",
-                                                "You failed to upload " + name + " => " + e.getMessage());
-                        }
-                }
-                else {
-                        redirectAttributes.addFlashAttribute("message",
-                                        "You failed to upload " + name + " because the file was empty");
-                }
-
-                return "redirect:/";
+                stream.close();
+                redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + name + "!");
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("message", "You failed to upload " + name + " => " + e.getMessage());
+            }
+        } else {
+            redirectAttributes.addFlashAttribute("message", "You failed to upload " + name + " because the file was empty");
         }
+
+        return "redirect:/";
+    }
 
 }
