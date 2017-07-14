@@ -17,7 +17,7 @@ public class ReportGenerator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReportGenerator.class);
 
-    public void generate(Reports report, Connection connection, HashMap params) {
+    public void generate(Reports report, Connection connection, HashMap<String, Object> params) {
 
         try {
             LOGGER.info("Start ...."+report.getJrxmlFilename());
