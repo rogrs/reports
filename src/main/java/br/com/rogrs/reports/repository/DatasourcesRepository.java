@@ -7,6 +7,9 @@ import br.com.rogrs.reports.domain.Datasources;
 
 @RepositoryRestResource(collectionResourceRel = "datasourcesRel", path = "datasources")
 public interface DatasourcesRepository extends JpaRepository<Datasources, Long> {
+	
+	
+	public Datasources findByDatabase(String database);
 
 
 }

@@ -7,6 +7,8 @@ import br.com.rogrs.reports.domain.Reports;
 
 @RepositoryRestResource(collectionResourceRel = "reportsRel", path = "reports")
 public interface ReportsRepository extends JpaRepository<Reports, Long> {
+	
+	public Reports findByMenuName(String menuName);
 
 
 }
