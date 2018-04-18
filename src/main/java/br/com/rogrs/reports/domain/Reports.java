@@ -18,6 +18,8 @@ public class Reports extends AbstractPersistable<Long>{
     
     private String menuName;
 
+    private String teste;
+
     public String getMenuName() {
         return menuName;
     }
