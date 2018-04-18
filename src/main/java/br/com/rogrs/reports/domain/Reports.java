@@ -52,4 +52,12 @@ public class Reports extends AbstractPersistable<Long>{
         this.pdfFilename = pdfFilename;
     }
 
+	public String getTeste() {
+		return teste;
+	}
+
+	public void setTeste(String teste) {
+		this.teste = teste;
+	}
+
 }
