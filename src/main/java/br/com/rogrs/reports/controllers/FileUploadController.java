@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.rogrs.reports.Application;
+import br.com.rogrs.reports.ReportsApplication;
 
 @Controller
 public class FileUploadController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public String provideUploadInfo(Model model) {
-        File rootFolder = new File(Application.ROOT);
+        File rootFolder = new File(ReportsApplication.ROOT);
         model.addAttribute("files", Arrays.stream(rootFolder.listFiles()).sorted(Comparator.comparingLong(f -> -1 * f.lastModified()))
                 .map(f -> f.getName()).collect(Collectors.toList()));
 
@@ -44,7 +44,7 @@ public class FileUploadController {
 
         if (!file.isEmpty()) {
             try {
-                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(Application.ROOT + "/" + name)));
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(ReportsApplication.ROOT + "/" + name)));
                 FileCopyUtils.copy(file.getInputStream(), stream);
                 stream.close();
                 redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + name + "!");
