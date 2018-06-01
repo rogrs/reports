@@ -7,7 +7,32 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<name>reports</name>
-	<url>http://jreports.com</url>
+		<url>https://github.com/rogrs/reports</url>
+
+	<issueManagement>
+		<url>https://github.com/rogrs/reports/issues</url>
+		<system>GitHub Issues</system>
+	</issueManagement>
+
+	<scm>
+		<url>https://github.com/rogrs/reports</url>
+		<connection>scm:git:git://github.com/rogrs/reports.git</connection>
+		<developerConnection>scm:git:git@github.com:rogrs/reports.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<developers>
+		<developer>
+			<email>rogerio.rs@gmail.com</email>
+			<name>Rogerio Ribeiro</name>
+			<url>https://github.com/reports</url>
+			<id>rogrs</id>
+		</developer>
+	</developers>
+
+	<prerequisites>
+		<maven>3.0.0</maven>
+	</prerequisites>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
