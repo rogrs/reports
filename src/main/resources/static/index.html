@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports</title>
+<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
+	rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/skeleton.css">
+<link rel="stylesheet" href="css/custom.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<body>
+
+	<div class="container">
+		<section class="header">
+			<h1>Reports</h1>
+		</section>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="one-half column" style="margin-top: 5%; margin-bottom: 2%">
+				<h5>Impressão por método POST</h5>
+				<p>
+					Enviei parâmetros para o relatório<br />Parâmetros não
+					obrigatórios.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="eleven column">
+				<form action="/relatorio" method="POST" target="_blank">
+				
+					<div class="row">
+						<div class="six columns">
+							<label for="nome">Seu Nome</label>
+							
+							<input class="u-full-width" type="text" placeholder="João da Silva" id="nome" name="nome">
+						</div>
+						
+						<div class="six columns">
+							<label for="assinatura">Assinatura</label>
+							
+							<select class="u-full-width" id="assinatura" name="assinatura">
+								<option value="SIM">Sim</option>
+								<option value="NAO">Não</option>
+							</select>
+						</div>
+					</div>
+					
+					<label for="cabecalho">Cabeçalho do relatório</label>
+					<textarea class="u-full-width" placeholder="Relatório impresso para conferência de estoque" id="cabecalho" name="cabecalho"></textarea>
+					
+					<input class="button-primary" type="submit" value="Imprimir">
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<section class="footer">
+			
+		</section>
+	</div>
+
+</body>
+</html>

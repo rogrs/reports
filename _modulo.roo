@@ -1,8 +1,0 @@
-// Creating Northwind project
-project setup --topLevelPackage br.com.rogrs.reports --projectName reports --java 8
-
-// Configuring settings
-settings add --name spring.roo.jpa.require.schema-object-name --value true
-
-// Configure persistence
-jpa setup --provider HIBERNATE --database HYPERSONIC_PERSISTENT
