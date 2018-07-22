@@ -11,6 +11,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
@@ -21,11 +22,15 @@ public abstract class AbstractEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
 	@SequenceGenerator(name = "sequenceGenerator")
 	private Long id;
+	
+	@NotNull
+	@Column(name = "criado", updatable = false, nullable = false)
 
-	@Column(name = "criado")
+
 	private LocalDate criado;
-
-	@Column(name = "modificado")
+	
+	@NotNull
+	@Column(name = "modificado", nullable = false)
 	private LocalDate modificado;
 
 	public Long getId() {
