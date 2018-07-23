@@ -8,5 +8,8 @@ import br.com.rogrs.domain.Application;
 @SuppressWarnings("unused")
 @Repository
 public interface ApplicationRepository extends JpaRepository<Application, Long> {
+	
+	
+	public Application findByName(String name);
 
 }

@@ -28,8 +28,12 @@ public class ReportGeneratePDF {
 
 	private final Logger log = LoggerFactory.getLogger(ReportGeneratePDF.class);
 
-	@Autowired
 	private DataSource dataSource;
+
+	@Autowired
+	public ReportGeneratePDF(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
 
 	public void execute(Map<String, Object> parametros, final String fileName, final HttpServletResponse response) {
 

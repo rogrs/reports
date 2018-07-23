@@ -147,13 +147,10 @@ public class Application extends AbstractEntity {
 		return Objects.hashCode(getId());
 	}
 
-    @Override
-    public String toString() {
-        return "Application{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", description='" + getDescription() + "'" +
-            "}";
-    }
+	@Override
+	public String toString() {
+		return "Application [uuid=" + uuid + ", name=" + name + ", description=" + description + ", datasources="
+				+ datasources + ", reports=" + reports + "]";
+	}
 
 }

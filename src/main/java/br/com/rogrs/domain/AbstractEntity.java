@@ -25,8 +25,6 @@ public abstract class AbstractEntity implements Serializable {
 	
 	@NotNull
 	@Column(name = "criado", updatable = false, nullable = false)
-
-
 	private LocalDate criado;
 	
 	@NotNull
