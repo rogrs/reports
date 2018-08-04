@@ -3,18 +3,15 @@ package br.com.rogrs.domain;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "aplication")
@@ -22,11 +19,6 @@ import org.hibernate.annotations.GenericGenerator;
 public class Application extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
-
-	@GeneratedValue(generator = "uuid2")
-	@GenericGenerator(name = "uuid2", strategy = "uuid2")
-	@Column(name = "uuid", columnDefinition = "BINARY(16)")
-	private UUID uuid;
 
 	@NotNull
 	@Column(name = "name", nullable = false)
@@ -37,19 +29,11 @@ public class Application extends AbstractEntity {
 
 	@OneToMany(mappedBy = "aplication")
 	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-	private Set<Datasource> datasources = new HashSet<>();
+	private Set<Database> datasources = new HashSet<>();
 
 	@OneToMany(mappedBy = "aplication")
 	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	private Set<Report> reports = new HashSet<>();
-
-	public UUID getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(UUID uuid) {
-		this.uuid = uuid;
-	}
 
 	public String getName() {
 		return name;
@@ -77,28 +61,28 @@ public class Application extends AbstractEntity {
 		this.description = description;
 	}
 
-	public Set<Datasource> getDatasources() {
+	public Set<Database> getDatasources() {
 		return datasources;
 	}
 
-	public Application datasources(Set<Datasource> datasources) {
+	public Application datasources(Set<Database> datasources) {
 		this.datasources = datasources;
 		return this;
 	}
 
-	public Application addDatasource(Datasource datasource) {
+	public Application addDatasource(Database datasource) {
 		this.datasources.add(datasource);
 		datasource.setAplication(this);
 		return this;
 	}
 
-	public Application removeDatasource(Datasource datasource) {
+	public Application removeDatasource(Database datasource) {
 		this.datasources.remove(datasource);
 		datasource.setAplication(null);
 		return this;
 	}
 
-	public void setDatasources(Set<Datasource> datasources) {
+	public void setDatasources(Set<Database> datasources) {
 		this.datasources = datasources;
 	}
 
@@ -147,10 +131,6 @@ public class Application extends AbstractEntity {
 		return Objects.hashCode(getId());
 	}
 
-	@Override
-	public String toString() {
-		return "Application [uuid=" + uuid + ", name=" + name + ", description=" + description + ", datasources="
-				+ datasources + ", reports=" + reports + "]";
-	}
+
 
 }

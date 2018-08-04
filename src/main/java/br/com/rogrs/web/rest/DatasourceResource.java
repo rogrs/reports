@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 
-import br.com.rogrs.domain.Datasource;
+import br.com.rogrs.domain.Database;
 import br.com.rogrs.repository.DatasourceRepository;
 import br.com.rogrs.web.rest.errors.BadRequestAlertException;
 import br.com.rogrs.web.rest.util.HeaderUtil;
@@ -48,12 +48,12 @@ public class DatasourceResource {
 
     @PostMapping("/datasources")
     @Timed
-    public ResponseEntity<Datasource> createDatasource(@Valid @RequestBody Datasource datasource) throws URISyntaxException {
+    public ResponseEntity<Database> createDatasource(@Valid @RequestBody Database datasource) throws URISyntaxException {
         log.debug("REST request to save Datasource : {}", datasource);
         if (datasource.getId() != null) {
             throw new BadRequestAlertException("A new datasource cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Datasource result = datasourceRepository.save(datasource);
+        Database result = datasourceRepository.save(datasource);
         return ResponseEntity.created(new URI("/api/datasources/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -61,12 +61,12 @@ public class DatasourceResource {
 
     @PutMapping("/datasources")
     @Timed
-    public ResponseEntity<Datasource> updateDatasource(@Valid @RequestBody Datasource datasource) throws URISyntaxException {
+    public ResponseEntity<Database> updateDatasource(@Valid @RequestBody Database datasource) throws URISyntaxException {
         log.debug("REST request to update Datasource : {}", datasource);
         if (datasource.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Datasource result = datasourceRepository.save(datasource);
+        Database result = datasourceRepository.save(datasource);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, datasource.getId().toString()))
             .body(result);
@@ -80,9 +80,9 @@ public class DatasourceResource {
      */
     @GetMapping("/datasources")
     @Timed
-    public ResponseEntity<List<Datasource>> getAllDatasources(Pageable pageable) {
+    public ResponseEntity<List<Database>> getAllDatasources(Pageable pageable) {
         log.debug("REST request to get a page of Datasources");
-        Page<Datasource> page = datasourceRepository.findAll(pageable);
+        Page<Database> page = datasourceRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/datasources");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -90,9 +90,9 @@ public class DatasourceResource {
 
     @GetMapping("/datasources/{id}")
     @Timed
-    public ResponseEntity<Datasource> getDatasource(@PathVariable Long id) {
+    public ResponseEntity<Database> getDatasource(@PathVariable Long id) {
         log.debug("REST request to get Datasource : {}", id);
-        Optional<Datasource> datasource = datasourceRepository.findById(id);
+        Optional<Database> datasource = datasourceRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(datasource);
     }
 
